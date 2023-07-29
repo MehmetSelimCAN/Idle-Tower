@@ -9,7 +9,7 @@ using ETouch = UnityEngine.InputSystem.EnhancedTouch;
 public class PlayerMovementController : MonoBehaviour
 {
     [SerializeField] private float speed;
-    private Rigidbody rigidbody;
+    private Rigidbody rb;
     
     #region Joystick Input
     [SerializeField] private FloatingJoystick joystick;
@@ -24,7 +24,7 @@ public class PlayerMovementController : MonoBehaviour
         EnhancedTouchSupport.Enable();
         ETouch.Touch.onFingerDown += HandleFingerDown;
         ETouch.Touch.onFingerUp += HandleFingerUp;
-        ETouch.Touch.onFingerMove += HangFingerMove;
+        ETouch.Touch.onFingerMove += HandleFingerMove;
     }
 
     private void OnDisable()
@@ -32,7 +32,7 @@ public class PlayerMovementController : MonoBehaviour
         EnhancedTouchSupport.Disable();
         ETouch.Touch.onFingerDown -= HandleFingerDown;
         ETouch.Touch.onFingerUp -= HandleFingerUp;
-        ETouch.Touch.onFingerMove -= HangFingerMove;
+        ETouch.Touch.onFingerMove -= HandleFingerMove;
     }
     private void HandleFingerDown(Finger touchedFinger)
     {
@@ -55,7 +55,7 @@ public class PlayerMovementController : MonoBehaviour
             movementAmount = Vector2.zero;
         }
     }
-    private void HangFingerMove(Finger movedFinger)
+    private void HandleFingerMove(Finger movedFinger)
     {
         if (movedFinger == movementFinger)
         {
@@ -106,7 +106,7 @@ public class PlayerMovementController : MonoBehaviour
 
     private void Start()
     {
-        rigidbody = GetComponent<Rigidbody>();
+        rb = GetComponent<Rigidbody>();
     }
 
     private void FixedUpdate()
@@ -118,6 +118,6 @@ public class PlayerMovementController : MonoBehaviour
     {
         Vector3 moveDirection = new Vector3(movementAmount.x, 0, movementAmount.y);
 
-        rigidbody.velocity = moveDirection * speed * Time.fixedDeltaTime;
+        rb.velocity = moveDirection * speed * Time.fixedDeltaTime;
     }
 }
