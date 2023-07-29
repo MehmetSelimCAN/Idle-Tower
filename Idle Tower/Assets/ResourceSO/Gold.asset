@@ -9,6 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5c9fa3363bc810942a73827d63607ae4, type: 3}
-  m_Name: TowerDamageResources
+  m_Script: {fileID: 11500000, guid: 8fe48ecf1027bcb45a0bba8b8fa4c377, type: 3}
+  m_Name: Gold
   m_EditorClassIdentifier: 
+  resourceType: 1
+  prefab: {fileID: 7218565723566872659, guid: c8aaeb3087d48f245b9b57890a03fb69, type: 3}
+  sprite: {fileID: 21300000, guid: 70a71f0e790908149847ae6c36ca9bd7, type: 3}

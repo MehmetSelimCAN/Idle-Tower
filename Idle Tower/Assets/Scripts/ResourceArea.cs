@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ResourceArea : MonoBehaviour, IInteractable
 {
-    private int resourceCount = 3;
+    private int resourceCount;
     [SerializeField] private Transform[] resources;
     [SerializeField] private ResourceSO resourceSO;
 
@@ -15,7 +15,7 @@ public class ResourceArea : MonoBehaviour, IInteractable
 
     public void Init()
     {
-        resourceCount = Random.Range(1, 3);
+        resourceCount = Random.Range(1, resources.Length);
         for (int i = 0; i < resourceCount; i++)
         {
             resources[i].gameObject.SetActive(true);

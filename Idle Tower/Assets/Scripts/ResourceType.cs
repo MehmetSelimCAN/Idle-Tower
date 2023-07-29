@@ -1,6 +1,7 @@
 public enum ResourceType
 {
-    Wood,
     Iron,
+    Gold,
     Diamond,
+    Point,
 }

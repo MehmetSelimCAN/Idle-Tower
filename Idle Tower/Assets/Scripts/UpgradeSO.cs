@@ -6,6 +6,7 @@ using UnityEngine;
 [CreateAssetMenu]
 public class UpgradeSO : ScriptableObject
 {
+    public string upgradeName;
     public UpgradeType upgradeType;
     public float incrementValue;
     public List<RequiredResource> requiredResources;
@@ -14,6 +15,6 @@ public class UpgradeSO : ScriptableObject
 [Serializable]
 public struct RequiredResource
 {
-    public ResourceType resourceType;
+    public ResourceSO resourceSO;
     public int requiredValue;
 }

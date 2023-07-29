@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: Diamond
   m_EditorClassIdentifier: 
   resourceType: 2
-  prefab: {fileID: 6308936722063245432, guid: e37d15a673365fb4ab50deb604cc2ee7, type: 3}
+  prefab: {fileID: 2686175705762246313, guid: e37d15a673365fb4ab50deb604cc2ee7, type: 3}
+  sprite: {fileID: 21300000, guid: e5f405f2db56d95478bfc0704573fea9, type: 3}

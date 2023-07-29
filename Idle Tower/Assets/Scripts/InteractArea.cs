@@ -32,6 +32,7 @@ public class InteractArea : MonoBehaviour
 
             if (remainingInteractCount <= 0)
             {
+                //TODO: Add breaking particle effect
                 Destroy(transform.parent.gameObject);
             }
             else

@@ -36,7 +36,7 @@ public class ResourceManager : MonoBehaviour
         }
     }
 
-    public float GetResourceValue(ResourceType resourceType)
+    public int GetResourceValue(ResourceType resourceType)
     {
         return m_Resources[resourceType];
     }
@@ -50,10 +50,16 @@ public class ResourceManager : MonoBehaviour
     {
         m_Resources[resourceType] += value;
         Debug.Log(resourceType + " Resource gathered!" + " Total: " + m_Resources[resourceType]);
+        UpgradeVisualManager.Instance.UpdateRequiredResourceVisuals();
+        UpgradeMenuResourcesUI.Instance.UpdateResourceTexts();
+        GameResourcesUI.Instance.UpdateResourceTexts();
     }
 
     public void SpendResource(ResourceType resourceType, int value)
     {
         m_Resources[resourceType] -= value;
+        UpgradeVisualManager.Instance.UpdateRequiredResourceVisuals();
+        UpgradeMenuResourcesUI.Instance.UpdateResourceTexts();
+        GameResourcesUI.Instance.UpdateResourceTexts();
     }
 }

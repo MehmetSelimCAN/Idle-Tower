@@ -9,7 +9,6 @@ public class UpgradeArea : MonoBehaviour, IInteractable
     public void Interact()
     {
         upgradeCanvas.gameObject.SetActive(true);
-        Debug.Log("Upgrade menu opened!");
     }
 
     public int GetInteractCount() => 1;
