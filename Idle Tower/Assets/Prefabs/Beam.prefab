@@ -149,3 +149,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ad563358bdbc2649a039f2ad5729fbd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  beamData: {fileID: 11400000, guid: a35e46aa37781674a80ac0af84bb2c9b, type: 2}

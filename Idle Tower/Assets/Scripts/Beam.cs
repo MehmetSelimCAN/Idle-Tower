@@ -7,8 +7,8 @@ public class Beam : MonoBehaviour
 {
     private LineRenderer lineRenderer;
     private float beamDuration = 0.5f;
-    private int damage = 10;
 
+    [SerializeField] private BeamData beamData;
     private void Awake()
     {
         lineRenderer = GetComponent<LineRenderer>();
@@ -38,7 +38,7 @@ public class Beam : MonoBehaviour
             {
                 if (hit.collider.CompareTag("enemy"))
                 {
-                    hit.collider.GetComponent<Enemy>().TakeDamage(damage * (1 - elapsedTime / beamDuration));
+                    hit.collider.GetComponent<Enemy>().TakeDamage(beamData.damage * (1 - elapsedTime / beamDuration));
                 }
             }
 

@@ -7,6 +7,7 @@ public class BeamLauncher : MonoBehaviour
     [SerializeField] private GameObject beamPrefab;
     [SerializeField] private float launchInterval = 3f;
     [SerializeField] private float beamLength = 100f;
+    [SerializeField] private BeamData beamData;
 
     private Transform enemyParent;
 
@@ -14,6 +15,7 @@ public class BeamLauncher : MonoBehaviour
     {
         enemyParent = GameObject.Find("EnemyParent").transform;
         StartCoroutine(LaunchBeams());
+        launchInterval = beamData.fireRate;
     }
 
     private IEnumerator LaunchBeams()

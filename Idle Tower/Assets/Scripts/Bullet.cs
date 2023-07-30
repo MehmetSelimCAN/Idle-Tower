@@ -7,8 +7,9 @@ public class Bullet : MonoBehaviour
 {
     private float lifeTime = 3f;
     private float timeAlive = 0f;
-    private float damage = 10f;
     public float speed = 200f;
+
+    [SerializeField] private BulletDataSO bulletData;
     private void Update()
     {
         timeAlive += Time.deltaTime;
@@ -24,7 +25,7 @@ public class Bullet : MonoBehaviour
         if (other.gameObject.CompareTag("enemy"))
         {
             Debug.Log("I hit an enemy!");
-            other.gameObject.GetComponent<Enemy>().TakeDamage(damage);
+            other.gameObject.GetComponent<Enemy>().TakeDamage(bulletData.damage);
         }
         ObjectPool.Instance.ReturnObjectToPool(0, gameObject);
         

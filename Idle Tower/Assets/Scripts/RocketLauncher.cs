@@ -6,6 +6,7 @@ public class RocketLauncher : MonoBehaviour
 {
     [SerializeField] private GameObject rocketPrefab;
     [SerializeField] private float launchInterval = 3f;
+    [SerializeField] private RocketData rocketData;
     [SerializeField] private GameObject rocketLauncherVisual;
 
     private Transform enemyParent;
@@ -13,7 +14,7 @@ public class RocketLauncher : MonoBehaviour
     private void Start()
     {
         enemyParent = GameObject.Find("EnemyParent").transform;
-        
+        launchInterval = rocketData.fireRate;
         StartCoroutine(LaunchRockets());
     }
 

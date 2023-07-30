@@ -27,7 +27,7 @@ public class UpgradeManager : MonoBehaviour
 
     public void Upgrade(UpgradeListSO upgradeListSO)
     {
-        //TODO: Upgrade'e göre stat değişimi yapılacak?
+        //TODO: Upgrade'e gÃ¶re stat deÄŸiÅŸimi yapÄ±lacak?
         currentUpgrades[upgradeListSO]++;
     }
 }

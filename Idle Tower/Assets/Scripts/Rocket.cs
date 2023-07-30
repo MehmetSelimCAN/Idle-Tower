@@ -4,10 +4,10 @@ using UnityEngine.Rendering;
 
 public class Rocket : MonoBehaviour
 {
+    [SerializeField] private RocketData rocketData;
     private Rigidbody rb;
     private float rocketSpeed = 200f;
     private float areaDamageRadius = 5f;
-    private int damage = 5; 
 
     private Transform targetTransform;
     private Vector3 targetDirection;
@@ -53,7 +53,7 @@ public class Rocket : MonoBehaviour
         {
             if (hitCollider.CompareTag("enemy"))
             {
-                hitCollider.GetComponent<Enemy>().TakeDamage(damage);
+                hitCollider.GetComponent<Enemy>().TakeDamage(rocketData.damage);
             }
         }
     }

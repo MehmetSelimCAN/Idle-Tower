@@ -5,11 +5,11 @@ using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using ETouch = UnityEngine.InputSystem.EnhancedTouch;
 
-public class TowerShooting : MonoBehaviour
+public class Turret : MonoBehaviour
 {
     [SerializeField] private Transform towerFirePoint;
-    [SerializeField] private float yLevel = 0f;
     [SerializeField] private float shootCooldown = 0.5f;
+    [SerializeField] private BulletDataSO bulletData;
 
     private bool isShooting = false;
     private float lastShootTime = 0f;
@@ -110,6 +110,7 @@ public class TowerShooting : MonoBehaviour
     private void Start()
     {
         mainCam = Camera.main;
+        shootCooldown = bulletData.fireRate;
     }
     private void OnDisable()
     {
@@ -191,4 +192,5 @@ public class TowerShooting : MonoBehaviour
     {
         transform.LookAt(targetImage);
     }
+    
 }
