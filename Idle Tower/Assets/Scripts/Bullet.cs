@@ -21,15 +21,12 @@ public class Bullet : MonoBehaviour
     
     private void OnTriggerEnter(Collider other)
     {
-        if (!other.gameObject.CompareTag("Tower"))
+        if (other.gameObject.CompareTag("enemy"))
         {
-            if (other.gameObject.CompareTag("enemy"))
-            {
-                Debug.Log("I hit an enemy!");
-                other.gameObject.GetComponent<Enemy>().TakeDamage(damage);
-            }
-            ObjectPool.Instance.ReturnObjectToPool(0, gameObject);
+            Debug.Log("I hit an enemy!");
+            other.gameObject.GetComponent<Enemy>().TakeDamage(damage);
         }
+        ObjectPool.Instance.ReturnObjectToPool(0, gameObject);
         
     }
 }

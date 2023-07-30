@@ -10,6 +10,8 @@ public class PlayerMovementController : MonoBehaviour
 {
     [SerializeField] private float speed;
     private Rigidbody rb;
+
+    private Animator animator;
     
     #region Joystick Input
     [SerializeField] private FloatingJoystick joystick;

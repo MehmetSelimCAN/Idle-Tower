@@ -81,6 +81,7 @@ public class UpgradeVisualManager : MonoBehaviour
         upgradeVisual.SetUpgradeList(upgradeListSO);
 
         SetRequiredResourceVisuals(upgradeListSO);
+        UpgradeVisualManager.Instance.UpdateRequiredResourceVisuals();
     }
 
     public void UpdateRequiredResourceVisuals()
