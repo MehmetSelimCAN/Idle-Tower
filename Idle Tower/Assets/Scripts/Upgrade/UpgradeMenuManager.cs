@@ -64,7 +64,7 @@ public class UpgradeMenuManager : MonoBehaviour
         }
     }
 
-    private void CloseMenu()
+    public void CloseMenu()
     {
         gameObject.SetActive(false);
     }

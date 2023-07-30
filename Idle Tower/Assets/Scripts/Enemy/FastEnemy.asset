@@ -15,4 +15,4 @@ MonoBehaviour:
   enemyName: Fast
   health: 10
   damage: 2
-  speed: 7
+  speed: 4

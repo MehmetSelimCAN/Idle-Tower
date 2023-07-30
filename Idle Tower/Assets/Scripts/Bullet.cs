@@ -24,7 +24,6 @@ public class Bullet : MonoBehaviour
     {
         if (other.gameObject.CompareTag("enemy"))
         {
-            Debug.Log("I hit an enemy!");
             other.gameObject.GetComponent<Enemy>().TakeDamage(bulletData.damage);
         }
         ObjectPool.Instance.ReturnObjectToPool(0, gameObject);

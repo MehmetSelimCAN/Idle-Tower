@@ -6,7 +6,7 @@ public class Rocket : MonoBehaviour
 {
     [SerializeField] private RocketData rocketData;
     private Rigidbody rb;
-    private float rocketSpeed = 200f;
+    private float rocketSpeed = 400f;
     private float areaDamageRadius = 5f;
 
     private Transform targetTransform;

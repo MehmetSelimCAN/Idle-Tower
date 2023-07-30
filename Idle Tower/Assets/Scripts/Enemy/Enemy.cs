@@ -75,6 +75,7 @@ public class Enemy : MonoBehaviour
         {
             ObjectPool.Instance.ReturnObjectToPool(1, gameObject);
             gameObject.SetActive(false);
+            WaveSpawner.Instance.activeEnemyCount--;
         }
     }
 
