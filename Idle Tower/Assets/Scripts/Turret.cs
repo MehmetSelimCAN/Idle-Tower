@@ -2,40 +2,127 @@ using System;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 using ETouch = UnityEngine.InputSystem.EnhancedTouch;
 
 public class TowerShooting : MonoBehaviour
 {
-    public Transform towerFirePoint;
-    public float yLevel = 0f;
-    public LineRenderer lineRenderer;
-    public float shootCooldown = 0.5f;
+    [SerializeField] private Transform towerFirePoint;
+    [SerializeField] private float yLevel = 0f;
+    [SerializeField] private float shootCooldown = 0.5f;
 
     private bool isShooting = false;
     private float lastShootTime = 0f;
     private Vector3 targetPosition;
+    [SerializeField] private float targetIconMoveSpeed = 10;
 
     private Camera mainCam;
+    
+    [SerializeField] private FloatingJoystick joystick;
+    [SerializeField] private Vector2 joystickSize = new Vector2(300, 300);
+    
+    private ETouch.Finger movementFinger;
+    private Vector2 movementAmount;
+
+    [SerializeField] private RectTransform targetImage;
 
     private void OnEnable()
     {
         ETouch.EnhancedTouchSupport.Enable();
+        ETouch.Touch.onFingerDown += HandleFingerDown;
+        ETouch.Touch.onFingerUp += HoldFingerUp;
+        ETouch.Touch.onFingerMove += HandleFingerMove;
     }
 
-    private void OnDisable()
+    private void HandleFingerMove(ETouch.Finger movedFinger)
     {
-        ETouch.EnhancedTouchSupport.Disable();
+        if (movedFinger == movementFinger)
+        {
+            Vector2 knobPosition;
+            float maxMovement = joystickSize.x / 2f;
+            ETouch.Touch currentTouch = movedFinger.currentTouch;
+
+            if (Vector2.Distance(
+                currentTouch.screenPosition,
+                joystick.GetComponent<RectTransform>().anchoredPosition
+            ) > maxMovement)
+            {
+                knobPosition = (
+                                   currentTouch.screenPosition - joystick.GetComponent<RectTransform>().anchoredPosition
+                               ).normalized
+                               * maxMovement;
+            }
+            else
+            {
+                knobPosition = currentTouch.screenPosition - joystick.GetComponent<RectTransform>().anchoredPosition;
+            }
+
+            joystick.knob.anchoredPosition = knobPosition;
+            movementAmount = knobPosition / maxMovement;
+        }
     }
 
+    private void HoldFingerUp(ETouch.Finger lostFinger)
+    {
+        if (lostFinger == movementFinger)
+        {
+            movementFinger = null;
+            joystick.knob.anchoredPosition = Vector2.zero;
+            joystick.gameObject.SetActive(false);
+            movementAmount = Vector2.zero;
+        }
+    }
+
+    private void HandleFingerDown(ETouch.Finger touchedFinger)
+    {
+        if (movementFinger == null)
+        {
+            movementFinger = touchedFinger;
+            movementAmount = Vector2.zero;
+            joystick.gameObject.SetActive(true);
+            joystick.GetComponent<RectTransform>().sizeDelta = joystickSize;
+            joystick.GetComponent<RectTransform>().anchoredPosition = ClampStartPosition(touchedFinger.screenPosition);
+        }
+    }
+    
+    private Vector2 ClampStartPosition(Vector2 startPosition)
+    {
+        if (startPosition.x < joystickSize.x / 2)
+        {
+            startPosition.x = joystickSize.x / 2;
+        }
+
+        if (startPosition.y < joystickSize.y / 2)
+        {
+            startPosition.y = joystickSize.y / 2;
+        }
+        else if (startPosition.y > Screen.height - joystickSize.y / 2)
+        {
+            startPosition.y = Screen.height - joystickSize.y / 2;
+        }
+
+        return startPosition;
+    }
+
+
+   
+    
     private void Start()
     {
         mainCam = Camera.main;
     }
-
+    private void OnDisable()
+    {
+        ETouch.EnhancedTouchSupport.Disable();
+        ETouch.Touch.onFingerDown -= HandleFingerDown;
+        ETouch.Touch.onFingerUp -= HoldFingerUp;
+        ETouch.Touch.onFingerMove -= HandleFingerMove;
+    }
     private void Update()
     {
         HandleShooting();
         RotateTurretHead();
+        MoveTargetIcon();
     }
 
     private void HandleShooting()
@@ -46,10 +133,7 @@ public class TowerShooting : MonoBehaviour
             {
                 StartShooting();
             }
-
-            targetPosition = GetTargetPositionFromTouch();
-            UpdateLineRenderer();
-
+            targetPosition = targetImage.position;
             if (CanShoot())
             {
                 FireBullet();
@@ -65,13 +149,11 @@ public class TowerShooting : MonoBehaviour
     private void StartShooting()
     {
         isShooting = true;
-        lineRenderer.enabled = true;
     }
 
     private void StopShooting()
     {
         isShooting = false;
-        lineRenderer.enabled = false;
     }
 
     private bool CanShoot()
@@ -97,39 +179,16 @@ public class TowerShooting : MonoBehaviour
         }
     }
 
-    private void UpdateLineRenderer()
+    private void MoveTargetIcon()
     {
-        lineRenderer.SetPosition(0, towerFirePoint.position);
-        lineRenderer.SetPosition(1, targetPosition);
+        Vector2 currentPosition = targetImage.anchoredPosition;
+        Vector2 newPosition = currentPosition + movementAmount * targetIconMoveSpeed * Time.deltaTime;
+        targetImage.anchoredPosition = newPosition;
     }
-
-    private Vector3 GetTargetPositionFromTouch()
-    {
-        if (ETouch.Touch.activeTouches.Count > 0)
-        {
-            Vector2 touchScreenPos = ETouch.Touch.activeTouches[0].screenPosition;
-            Ray ray = mainCam.ScreenPointToRay(touchScreenPos);
-            RaycastHit hit;
-
-            // Check if the ray intersects any objects in the scene
-            if (Physics.Raycast(ray, out hit))
-            {
-                // If there's an intersection, return the point of intersection
-                return hit.point;
-            }
-
-            // If there's no intersection, return the touch position projected to a point in front of the turret
-            return ray.GetPoint(100f);
-        }
-        else
-        {
-            // If no touches, return a fallback position (e.g., turret's forward direction)
-            return transform.position + targetPosition * 100f;
-        }
-    }
-
+    
+    
     private void RotateTurretHead()
     {
-       transform.LookAt(GetTargetPositionFromTouch());
+        transform.LookAt(targetImage);
     }
 }
