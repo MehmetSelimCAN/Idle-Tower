@@ -35,6 +35,11 @@ public class UpgradeVisual : MonoBehaviour
         _upgradeListSO = upgradeListSO;
     }
 
+    public void SetCurrentValue(float value)
+    {
+        upgradeCurrentValue.SetText(value.ToString());
+    }
+
     private void Upgrade()
     {
         if (CanUpgrade())
@@ -57,8 +62,7 @@ public class UpgradeVisual : MonoBehaviour
 
     public bool CanUpgrade()
     {
-        int currentUpgradeIndex = UpgradeManager.Instance.GetCurrentUpgradeIndex(_upgradeListSO);
-        UpgradeSO currentUpgradeSO = _upgradeListSO.list[currentUpgradeIndex];
+        UpgradeSO currentUpgradeSO = UpgradeManager.Instance.GetCurrentUpgradeSO(_upgradeListSO);
 
         foreach (var requiredResource in currentUpgradeSO.requiredResources)
         {
@@ -76,8 +80,7 @@ public class UpgradeVisual : MonoBehaviour
 
     private void SpendResources()
     {
-        int currentUpgradeIndex = UpgradeManager.Instance.GetCurrentUpgradeIndex(_upgradeListSO);
-        UpgradeSO currentUpgradeSO = _upgradeListSO.list[currentUpgradeIndex];
+        UpgradeSO currentUpgradeSO = UpgradeManager.Instance.GetCurrentUpgradeSO(_upgradeListSO);
 
         foreach (var requiredResource in currentUpgradeSO.requiredResources)
         {

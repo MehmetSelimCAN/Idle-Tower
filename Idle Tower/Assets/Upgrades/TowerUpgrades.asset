@@ -9,9 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6270ffcbb2a76344aab356152f318ab9, type: 3}
-  m_Name: GunAttackSpeedList
+  m_Script: {fileID: 11500000, guid: 971c682a38b87084aab20897d4778407, type: 3}
+  m_Name: TowerUpgrades
   m_EditorClassIdentifier: 
   list:
-  - {fileID: 11400000, guid: fd3c24e11e9441a498da17919534f80b, type: 2}
-  - {fileID: 11400000, guid: a77f66a5aa4204645b0ea52b7e0c6159, type: 2}
+  - {fileID: 11400000, guid: 072ddf67f6a16b146bcfff8bfda1b11b, type: 2}

@@ -3,11 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu]
+[CreateAssetMenu(menuName = "Upgrades/Upgrade")]
 public class UpgradeSO : ScriptableObject
 {
     public string upgradeName;
-    public UpgradeType upgradeType;
     public float incrementValue;
     public List<RequiredResource> requiredResources;
 }

@@ -1,7 +1,10 @@
 public enum UpgradeType
 {
-    TowerDamage,
-    TowerAttackSpeed,
-    MissileDamage,
-    MissileAttackDamage,
+    TurretDamage,
+    TurretFireRate,
+    RocketDamage,
+    RocketFireRate,
+    BeamDamage,
+    BeamFireRate,
+    TowerHealth,
 }

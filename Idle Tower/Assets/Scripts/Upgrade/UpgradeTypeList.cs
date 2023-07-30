@@ -3,8 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu]
-public class UpgradeListDenemeSO : ScriptableObject
+[CreateAssetMenu(menuName = "Upgrades/Upgrade Type List")]
+public class UpgradeTypeList : ScriptableObject
 {
     public List<UpgradeListSO> list;
 }

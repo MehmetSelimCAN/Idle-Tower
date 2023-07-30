@@ -9,9 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 971c682a38b87084aab20897d4778407, type: 3}
-  m_Name: Upgrades
+  m_Script: {fileID: 11500000, guid: 6270ffcbb2a76344aab356152f318ab9, type: 3}
+  m_Name: TurretDamageList
   m_EditorClassIdentifier: 
+  _name: Bullet Damage
   list:
-  - {fileID: 11400000, guid: c7ef3ac0b1f5e964da9adf63750ae73c, type: 2}
-  - {fileID: 11400000, guid: 238b869597f5b1b4eab39001de0c8364, type: 2}
+  - {fileID: 11400000, guid: bfcad62564e4369498b115a7da8a0915, type: 2}
+  - {fileID: 11400000, guid: 058f5639b0205344a9775a6ee64d127f, type: 2}

@@ -391,7 +391,7 @@ GameObject:
   m_Component:
   - component: {fileID: 16407941}
   m_Layer: 5
-  m_Name: GeneralUpgrades
+  m_Name: TowerUpgrades
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -534,7 +534,7 @@ GameObject:
   m_Component:
   - component: {fileID: 101905111}
   m_Layer: 5
-  m_Name: GunUpgrades
+  m_Name: TurretUpgrades
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -678,6 +678,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb9f29c3afcc04049aeb1f3fd3981cc2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  towerData: {fileID: 11400000, guid: 70303a45fa555ea4ca7a488e101be4a1, type: 2}
 --- !u!1 &110659962
 GameObject:
   m_ObjectHideFlags: 0
@@ -936,7 +937,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: General
+  m_text: Tower
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -963,7 +964,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 64.4
+  m_fontSize: 83.1
   m_fontSizeBase: 100
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -2577,7 +2578,7 @@ GameObject:
   - component: {fileID: 437321888}
   - component: {fileID: 437321887}
   m_Layer: 5
-  m_Name: GunButton
+  m_Name: TurretButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3203,7 +3204,7 @@ GameObject:
   - component: {fileID: 594798531}
   - component: {fileID: 594798530}
   m_Layer: 5
-  m_Name: GeneralButton
+  m_Name: TowerButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3673,7 +3674,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Gun
+  m_text: Turret
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -3700,7 +3701,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 100
+  m_fontSize: 86
   m_fontSizeBase: 95.44
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -4605,10 +4606,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4cc727bd0b752644db96a1a2c5d7e439, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gunAttackUpgradeList: {fileID: 11400000, guid: c7ef3ac0b1f5e964da9adf63750ae73c,
+  turretDamageUpgradeList: {fileID: 11400000, guid: c7ef3ac0b1f5e964da9adf63750ae73c,
     type: 2}
-  gunAttackSpeedUpgradeList: {fileID: 11400000, guid: 238b869597f5b1b4eab39001de0c8364,
+  turretFireRateUpgradeList: {fileID: 11400000, guid: 238b869597f5b1b4eab39001de0c8364,
     type: 2}
+  rocketDamageUpgradeList: {fileID: 11400000, guid: 1fa007faebc5b784d8bf4c08e2446f11,
+    type: 2}
+  rocketFireRateUpgradeList: {fileID: 11400000, guid: 4e36a087b4bc0c7438cc5b7c1d62f289,
+    type: 2}
+  beamDamageUpgradeList: {fileID: 11400000, guid: fed07dd6d27268844ac9175cdec22a2b,
+    type: 2}
+  beamFireRateUpgradeList: {fileID: 11400000, guid: 299390b2213c5a1448aec5ef602ce82b,
+    type: 2}
+  towerHealthUpgradeList: {fileID: 11400000, guid: 072ddf67f6a16b146bcfff8bfda1b11b,
+    type: 2}
+  initialBulletData: {fileID: 11400000, guid: be647f0d559ccb64884713aff50c952a, type: 2}
+  initialTowerData: {fileID: 11400000, guid: 793a791f56cf71e479bce6ee8ae3b6e9, type: 2}
+  initialBeamData: {fileID: 11400000, guid: c7a570e03d6d7b54d8b0138d9d3efa9f, type: 2}
+  initialRocketData: {fileID: 11400000, guid: dea2ada97423976428e6ea3b89203094, type: 2}
+  bulletData: {fileID: 11400000, guid: 1c931f2e0c3481841af8c22af4b114e4, type: 2}
+  towerData: {fileID: 11400000, guid: 70303a45fa555ea4ca7a488e101be4a1, type: 2}
+  beamData: {fileID: 11400000, guid: a35e46aa37781674a80ac0af84bb2c9b, type: 2}
+  rocketData: {fileID: 11400000, guid: 99e7ceffb23d7a64dbf5671508a23619, type: 2}
 --- !u!4 &878610092
 Transform:
   m_ObjectHideFlags: 0
@@ -5549,15 +5568,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fdffd25bdf0848e4a8852de388249d87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gunUpgrades: {fileID: 11400000, guid: 00ce1a6b33e06944797f868c42a45233, type: 2}
+  turretUpgrades: {fileID: 11400000, guid: 00ce1a6b33e06944797f868c42a45233, type: 2}
+  aoeUpgrades: {fileID: 11400000, guid: 65603b492cc33b340bb3f4e40145a282, type: 2}
+  towerUpgrades: {fileID: 11400000, guid: 156bd0d98db34b14d9393447c5fbd788, type: 2}
+  turretUpgradesParent: {fileID: 101905111}
+  aoeUpgradesParent: {fileID: 1039004038}
+  towerUpgradesParent: {fileID: 16407941}
   upgradeVisualTemplate: {fileID: 1941289537}
   upgradesHorizontalCount: 3
-  upgradesOffset: 500
+  upgradesOffset: 450
   requiredResourceVisualTemplate: {fileID: 1671655721}
   requiredResourceOffset: 125
-  gunUpgradesParent: {fileID: 101905111}
-  aoeUpgradesParent: {fileID: 1039004038}
-  generalUpgradesParent: {fileID: 16407941}
 --- !u!114 &1124213684
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5570,12 +5591,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd4b3cae76e04c64eb0cfc4bb47ec546, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gunUpgrades: {fileID: 101905111}
+  turretUpgrades: {fileID: 101905111}
   aoeUpgrades: {fileID: 1039004038}
-  generalUpgrades: {fileID: 16407941}
-  gunMenuButton: {fileID: 437321887}
+  towerUpgrades: {fileID: 16407941}
+  turretMenuButton: {fileID: 437321887}
   aoeMenuButton: {fileID: 1240236399}
-  generalMenuButton: {fileID: 594798530}
+  towerMenuButton: {fileID: 594798530}
   closeButton: {fileID: 12133162}
   buttonPressedSprite: {fileID: 21300090, guid: 1eaee135ce037439d925cee5e41ce026,
     type: 3}
@@ -6805,6 +6826,7 @@ MonoBehaviour:
     type: 3}
   launchInterval: 3
   beamLength: 100
+  beamData: {fileID: 11400000, guid: a35e46aa37781674a80ac0af84bb2c9b, type: 2}
 --- !u!4 &1485105977
 Transform:
   m_ObjectHideFlags: 0
@@ -7974,7 +7996,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -438, y: -34}
+  m_AnchoredPosition: {x: -438, y: 671}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1941289538

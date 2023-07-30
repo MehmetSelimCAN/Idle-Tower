@@ -10,13 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 659c49b03448aa74bb273113ead46202, type: 3}
-  m_Name: TowerAttackSpeed1
+  m_Name: BeamFireRate1
   m_EditorClassIdentifier: 
-  upgradeName: Speed
-  upgradeType: 1
+  upgradeName: Beam Fire Rate
   incrementValue: 0.1
   requiredResources:
   - resourceSO: {fileID: 11400000, guid: ed41bd9aa6657f9439bfb614752dc9dc, type: 2}
     requiredValue: 1
-  - resourceSO: {fileID: 11400000, guid: a11238f57511d3544a8c6c1b6a86abd7, type: 2}
+  - resourceSO: {fileID: 11400000, guid: 94d157e56769f5740a3395a11d5d5706, type: 2}
     requiredValue: 1

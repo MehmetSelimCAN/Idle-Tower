@@ -6,7 +6,13 @@ public class UpgradeVisualManager : MonoBehaviour
 {
     public static UpgradeVisualManager Instance { get; private set; }
 
-    [SerializeField] private UpgradeListDenemeSO gunUpgrades;
+    [SerializeField] private UpgradeTypeList turretUpgrades;
+    [SerializeField] private UpgradeTypeList aoeUpgrades;
+    [SerializeField] private UpgradeTypeList towerUpgrades;
+
+    [SerializeField] private RectTransform turretUpgradesParent;
+    [SerializeField] private RectTransform aoeUpgradesParent;
+    [SerializeField] private RectTransform towerUpgradesParent;
 
     [SerializeField] private RectTransform upgradeVisualTemplate;
     [SerializeField] private int upgradesHorizontalCount;
@@ -17,9 +23,6 @@ public class UpgradeVisualManager : MonoBehaviour
     [SerializeField] private int requiredResourceOffset;
     private Dictionary<UpgradeListSO, List<RequiredResourceVisual>> upgradeRequiredResourceDictionary;
 
-    [SerializeField] private RectTransform gunUpgradesParent;
-    [SerializeField] private RectTransform aoeUpgradesParent;
-    [SerializeField] private RectTransform generalUpgradesParent;
 
     private void Awake()
     {
@@ -31,16 +34,22 @@ public class UpgradeVisualManager : MonoBehaviour
 
     private void Start()
     {
+        Initialize(turretUpgrades, turretUpgradesParent);
+        Initialize(aoeUpgrades, aoeUpgradesParent);
+        Initialize(towerUpgrades, towerUpgradesParent);
+    }
+
+    private void Initialize(UpgradeTypeList upgradeTypeList, RectTransform parent)
+    {
         int rowNumber = 0;
         int horizontal = 0;
-        for (int i = 0; i < gunUpgrades.list.Count; i++)
+        for (int i = 0; i < upgradeTypeList.list.Count; i++)
         {
-            var upgradeVisual = Instantiate(upgradeVisualTemplate, gunUpgradesParent).GetComponent<UpgradeVisual>();
-            int currentUpgradeIndex = UpgradeManager.Instance.GetCurrentUpgradeIndex(gunUpgrades.list[i]);
-            UpgradeSO upgradeSO = gunUpgrades.list[i].list[currentUpgradeIndex];
+            var upgradeVisual = Instantiate(upgradeVisualTemplate, parent).GetComponent<UpgradeVisual>();
+            UpgradeSO upgradeSO = UpgradeManager.Instance.GetCurrentUpgradeSO(upgradeTypeList.list[i]);
             upgradeVisual.SetUpgradeName(upgradeSO.upgradeName);
             upgradeVisual.SetIncrementValue(upgradeSO.incrementValue);
-            upgradeVisual.SetUpgradeList(gunUpgrades.list[i]);
+            upgradeVisual.SetUpgradeList(upgradeTypeList.list[i]);
 
             List<RequiredResourceVisual> requiredResourceVisuals = new List<RequiredResourceVisual>();
             for (int j = 0; j < upgradeSO.requiredResources.Count; j++)
@@ -56,14 +65,14 @@ public class UpgradeVisualManager : MonoBehaviour
                 requiredResourceVisual.gameObject.SetActive(true);
             }
 
-            upgradeRequiredResourceDictionary.Add(gunUpgrades.list[i], requiredResourceVisuals);
+            upgradeRequiredResourceDictionary.Add(upgradeTypeList.list[i], requiredResourceVisuals);
 
             if (i % 3 == 0)
             {
                 rowNumber--;
                 horizontal = 0;
             }
-            upgradeVisual.transform.localPosition += new Vector3(horizontal * upgradesOffset, rowNumber * 400, 0);
+            upgradeVisual.transform.localPosition += new Vector3(horizontal * upgradesOffset, rowNumber * 600, 0);
             upgradeVisuals.Add(upgradeVisual);
             upgradeVisual.gameObject.SetActive(true);
 
@@ -74,14 +83,13 @@ public class UpgradeVisualManager : MonoBehaviour
     public void UpdateUpgradeVisual(UpgradeListSO upgradeListSO)
     {
         UpgradeVisual upgradeVisual = upgradeVisuals.Find(x => x.UpgradeListSO == upgradeListSO);
-        int currentUpgradeIndex = UpgradeManager.Instance.GetCurrentUpgradeIndex(upgradeListSO);
-        UpgradeSO upgradeSO = upgradeListSO.list[currentUpgradeIndex];
+        UpgradeSO upgradeSO = UpgradeManager.Instance.GetCurrentUpgradeSO(upgradeListSO);
         upgradeVisual.SetUpgradeName(upgradeSO.upgradeName);
         upgradeVisual.SetIncrementValue(upgradeSO.incrementValue);
         upgradeVisual.SetUpgradeList(upgradeListSO);
 
         SetRequiredResourceVisuals(upgradeListSO);
-        UpgradeVisualManager.Instance.UpdateRequiredResourceVisuals();
+        UpdateRequiredResourceVisuals();
     }
 
     public void UpdateRequiredResourceVisuals()
@@ -99,8 +107,7 @@ public class UpgradeVisualManager : MonoBehaviour
     public void SetRequiredResourceVisuals(UpgradeListSO upgradeListSO)
     {
         List<RequiredResourceVisual> requiredResourceVisuals = upgradeRequiredResourceDictionary[upgradeListSO];
-        int currentUpgradeIndex = UpgradeManager.Instance.GetCurrentUpgradeIndex(upgradeListSO);
-        UpgradeSO upgradeSO = upgradeListSO.list[currentUpgradeIndex];
+        UpgradeSO upgradeSO = UpgradeManager.Instance.GetCurrentUpgradeSO(upgradeListSO);
 
         for (int i = 0; i < requiredResourceVisuals.Count; i++)
         {
