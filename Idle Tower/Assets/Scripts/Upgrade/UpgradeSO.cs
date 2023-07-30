@@ -7,6 +7,7 @@ using UnityEngine;
 public class UpgradeSO : ScriptableObject
 {
     public string upgradeName;
+    public float currentValue;
     public float incrementValue;
     public List<RequiredResource> requiredResources;
 }

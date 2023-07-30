@@ -33,7 +33,7 @@ Transform:
   m_Children:
   - {fileID: 8702115230910721112}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 21
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &6254631847098544260
 BoxCollider:
@@ -179,6 +179,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy_2
       objectReference: {fileID: 0}
+    - target: {fileID: 3418461439442386459, guid: a0bfe8d61b249874aa7ebb0f3624c818,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 4e6417cc7bbc74243af7f57dd1c54295, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

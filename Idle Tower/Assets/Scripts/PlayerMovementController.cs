@@ -3,15 +3,17 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem.EnhancedTouch;
+using static UnityEngine.GraphicsBuffer;
 using ETouch = UnityEngine.InputSystem.EnhancedTouch;
 
 public class PlayerMovementController : MonoBehaviour
 {
     [SerializeField] private float speed;
     private Rigidbody rb;
-
-    private Animator animator;
+    
+    [HideInInspector] public Animator animator;
     
     #region Joystick Input
     [SerializeField] private FloatingJoystick joystick;
@@ -59,7 +61,7 @@ public class PlayerMovementController : MonoBehaviour
     }
     private void HandleFingerMove(Finger movedFinger)
     {
-        if (movedFinger == movementFinger)
+        if (movedFinger == movementFinger && !EventSystem.current.IsPointerOverGameObject())
         {
             Vector2 knobPosition;
             float maxMovement = joystickSize.x / 2f;
@@ -108,6 +110,7 @@ public class PlayerMovementController : MonoBehaviour
 
     private void Start()
     {
+        animator = GetComponentInChildren<Animator>();
         rb = GetComponent<Rigidbody>();
     }
 
@@ -121,5 +124,47 @@ public class PlayerMovementController : MonoBehaviour
         Vector3 moveDirection = new Vector3(movementAmount.x, 0, movementAmount.y);
 
         rb.velocity = moveDirection * speed * Time.fixedDeltaTime;
+
+        if (rb.velocity != Vector3.zero)
+        {
+            Vector3 relativePos = rb.velocity.normalized;
+            Quaternion rotation = Quaternion.LookRotation(relativePos, Vector3.up);
+            transform.rotation = rotation;
+        }
+
+        if (rb.velocity == Vector3.zero)
+        {
+            animator.SetBool("isRunning", false);
+        }
+        else
+        {
+            animator.SetBool("isRunning", true);
+        }
+    }
+
+    public void LookAt(Transform target)
+    {
+        Vector3 relativePos = target.position - transform.position;
+        Quaternion rotation = Quaternion.LookRotation(relativePos, Vector3.up);
+        transform.rotation = rotation;
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.CompareTag("ResourceArea"))
+        {
+            if (rb.velocity == Vector3.zero)
+            {
+                animator.SetBool("isMining", true);
+            }
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("ResourceArea"))
+        {
+            animator.SetBool("isMining", false);
+        }
     }
 }

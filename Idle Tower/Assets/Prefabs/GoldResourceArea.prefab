@@ -711,7 +711,7 @@ GameObject:
   - component: {fileID: 6168974699202259524}
   m_Layer: 0
   m_Name: InteractArea
-  m_TagString: Untagged
+  m_TagString: ResourceArea
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -744,7 +744,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49f58e1c906716741bb3fe10fee9026a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  requiredTimeToInteract: 1
+  requiredTimeToInteract: 2
   interactAreaVisual: {fileID: 352700254615115332}
 --- !u!65 &6168974699202259524
 BoxCollider:
@@ -863,7 +863,7 @@ GameObject:
   - component: {fileID: 8202799954902052012}
   m_Layer: 0
   m_Name: GoldResourceArea
-  m_TagString: Untagged
+  m_TagString: ResourceArea
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

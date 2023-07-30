@@ -14,6 +14,8 @@ public class InteractArea : MonoBehaviour
 
     [SerializeField] private InteractAreaVisual interactAreaVisual;
 
+    private PlayerMovementController _player;
+
     private void Awake()
     {
         remainingTimeToInteract = requiredTimeToInteract;
@@ -21,8 +23,9 @@ public class InteractArea : MonoBehaviour
         remainingInteractCount = interactable.GetInteractCount();
     }
 
-    private void Interact()
+    private void Interact(PlayerMovementController player)
     {
+        _player = player;
         interactable.Interact();
         interacted = true;
 
@@ -60,15 +63,25 @@ public class InteractArea : MonoBehaviour
         {
             if (other.CompareTag("Player"))
             {
+                other.transform.LookAt(transform.parent, Vector3.up);
                 //TODO: Player animasyonu deðiþecek. (Resource toplarken pickaxe sallama gibi.)
                 remainingTimeToInteract -= Time.deltaTime;
                 interactAreaVisual.UpdateTimerVisual(remainingTimeToInteract, requiredTimeToInteract);
 
                 if (remainingTimeToInteract <= 0)
                 {
-                    Interact();
+                    Interact(other.GetComponent<PlayerMovementController>());
                 }
             }
+        }
+    }
+
+    private void OnDestroy()
+    {
+        if (_player != null)
+        {
+            _player.animator.SetBool("isMining", false);
+            _player.animator.SetBool("isRunning", false);
         }
     }
 

@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 659c49b03448aa74bb273113ead46202, type: 3}
   m_Name: TurretFireRate1
   m_EditorClassIdentifier: 
-  upgradeName: Turret Fire Rate
-  incrementValue: 0.1
+  upgradeName: Turret Attack Speed
+  currentValue: 0.3
+  incrementValue: 0.05
   requiredResources:
   - resourceSO: {fileID: 11400000, guid: ed41bd9aa6657f9439bfb614752dc9dc, type: 2}
     requiredValue: 1

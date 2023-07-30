@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: TowerHealth1
   m_EditorClassIdentifier: 
   upgradeName: Tower Health
-  incrementValue: 1
+  currentValue: 100
+  incrementValue: 20
   requiredResources:
   - resourceSO: {fileID: 11400000, guid: ed41bd9aa6657f9439bfb614752dc9dc, type: 2}
     requiredValue: 3

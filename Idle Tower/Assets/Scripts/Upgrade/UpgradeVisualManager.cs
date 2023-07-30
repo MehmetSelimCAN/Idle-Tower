@@ -48,6 +48,7 @@ public class UpgradeVisualManager : MonoBehaviour
             var upgradeVisual = Instantiate(upgradeVisualTemplate, parent).GetComponent<UpgradeVisual>();
             UpgradeSO upgradeSO = UpgradeManager.Instance.GetCurrentUpgradeSO(upgradeTypeList.list[i]);
             upgradeVisual.SetUpgradeName(upgradeSO.upgradeName);
+            upgradeVisual.SetCurrentValue(upgradeSO.currentValue);
             upgradeVisual.SetIncrementValue(upgradeSO.incrementValue);
             upgradeVisual.SetUpgradeList(upgradeTypeList.list[i]);
 
@@ -85,6 +86,7 @@ public class UpgradeVisualManager : MonoBehaviour
         UpgradeVisual upgradeVisual = upgradeVisuals.Find(x => x.UpgradeListSO == upgradeListSO);
         UpgradeSO upgradeSO = UpgradeManager.Instance.GetCurrentUpgradeSO(upgradeListSO);
         upgradeVisual.SetUpgradeName(upgradeSO.upgradeName);
+        upgradeVisual.SetCurrentValue(upgradeSO.currentValue);
         upgradeVisual.SetIncrementValue(upgradeSO.incrementValue);
         upgradeVisual.SetUpgradeList(upgradeListSO);
 

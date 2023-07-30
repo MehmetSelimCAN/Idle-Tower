@@ -25,6 +25,11 @@ public class UpgradeVisual : MonoBehaviour
         upgradeNameText.SetText(upgradeName);
     }
 
+    public void SetCurrentValue(float value)
+    {
+        upgradeCurrentValue.SetText(value.ToString());
+    }
+
     public void SetIncrementValue(float value)
     {
         upgradeIncrementValue.SetText("+" + value.ToString());
@@ -33,11 +38,6 @@ public class UpgradeVisual : MonoBehaviour
     public void SetUpgradeList(UpgradeListSO upgradeListSO)
     {
         _upgradeListSO = upgradeListSO;
-    }
-
-    public void SetCurrentValue(float value)
-    {
-        upgradeCurrentValue.SetText(value.ToString());
     }
 
     private void Upgrade()

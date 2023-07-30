@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: BeamDamage1
   m_EditorClassIdentifier: 
   upgradeName: Beam Damage
-  incrementValue: 0.1
+  currentValue: 5
+  incrementValue: 2.5
   requiredResources:
   - resourceSO: {fileID: 11400000, guid: ed41bd9aa6657f9439bfb614752dc9dc, type: 2}
     requiredValue: 1

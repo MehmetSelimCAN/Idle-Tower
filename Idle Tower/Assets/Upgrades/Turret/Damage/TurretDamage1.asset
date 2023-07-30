@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: TurretDamage1
   m_EditorClassIdentifier: 
   upgradeName: Turret Damage
-  incrementValue: 0.25
+  currentValue: 5
+  incrementValue: 2.5
   requiredResources:
   - resourceSO: {fileID: 11400000, guid: a11238f57511d3544a8c6c1b6a86abd7, type: 2}
     requiredValue: 1

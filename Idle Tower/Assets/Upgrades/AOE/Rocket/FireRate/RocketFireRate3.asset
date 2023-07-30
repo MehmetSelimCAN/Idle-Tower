@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 659c49b03448aa74bb273113ead46202, type: 3}
   m_Name: RocketFireRate3
   m_EditorClassIdentifier: 
-  upgradeName: Rocket Fire Rate
+  upgradeName: Rocket Attack Speed
+  currentValue: 0.3
   incrementValue: 0.1
   requiredResources:
   - resourceSO: {fileID: 11400000, guid: ed41bd9aa6657f9439bfb614752dc9dc, type: 2}

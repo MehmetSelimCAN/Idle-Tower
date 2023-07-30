@@ -27,7 +27,7 @@ public class SceneManager : MonoBehaviour
 
    public void LoadTowerDefenseScene()
    {
-      UnityEngine.SceneManagement.SceneManager.LoadScene("SampleScene");
+      UnityEngine.SceneManagement.SceneManager.LoadScene("GameScene");
    }
    
 }
