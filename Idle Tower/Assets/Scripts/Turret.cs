@@ -24,7 +24,7 @@ public class Turret : MonoBehaviour
     private ETouch.Finger movementFinger;
     private Vector2 movementAmount;
 
-    [SerializeField] private RectTransform targetImage;
+    [SerializeField] private GameObject targetCube;
 
     private void OnEnable()
     {
@@ -134,7 +134,7 @@ public class Turret : MonoBehaviour
             {
                 StartShooting();
             }
-            targetPosition = targetImage.position;
+            targetPosition = targetCube.transform.position;
             if (CanShoot())
             {
                 FireBullet();
@@ -182,15 +182,16 @@ public class Turret : MonoBehaviour
 
     private void MoveTargetIcon()
     {
-        Vector2 currentPosition = targetImage.anchoredPosition;
-        Vector2 newPosition = currentPosition + movementAmount * targetIconMoveSpeed * Time.deltaTime;
-        targetImage.anchoredPosition = newPosition;
+        Vector3 moveDirection = new Vector3(movementAmount.x, 0, movementAmount.y);
+        Vector3 currentPosition = targetCube.transform.position;
+        Vector3 newPosition = currentPosition + moveDirection * targetIconMoveSpeed * Time.deltaTime;
+        targetCube.transform.position = newPosition;
     }
     
     
     private void RotateTurretHead()
     {
-        transform.LookAt(targetImage);
+        transform.LookAt(targetCube.transform);
     }
     
 }

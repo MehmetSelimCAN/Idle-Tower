@@ -18,6 +18,8 @@ public class Enemy : MonoBehaviour
 
     private bool shouldStop;
     private float initialYPosition;
+
+    private float damageRate = 1f;
     
     private void Start()
     {
@@ -84,6 +86,22 @@ public class Enemy : MonoBehaviour
             other.gameObject.GetComponent<Tower>().TakeDamage(damage);
             rb.velocity = Vector3.zero;
             rb.constraints = RigidbodyConstraints.FreezeAll;
+            StartCoroutine(DamageOverTime());
+        }
+    }
+
+    private void OnCollisionExit(Collision other)
+    {
+        StopCoroutine(DamageOverTime());
+    }
+
+    private IEnumerator DamageOverTime()
+    {
+        while (shouldStop)
+        {
+            // Wait for the specified interval before applying damage
+            yield return new WaitForSeconds(damageRate);
+            tower.GetComponent<Tower>().TakeDamage(damage);
         }
     }
 }
