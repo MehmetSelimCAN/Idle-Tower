@@ -38,19 +38,17 @@ public class BeamLauncher : MonoBehaviour
 
         if (randomEnemy != null)
         {
-            // Get the target position (enemy's position)
             Vector3 targetPosition = randomEnemy.transform.position;
-
-            // Rotate the grandparent object to look at the target position on the Y-axis
+            
             Vector3 lookAtDirection = targetPosition - platform.position;
-            lookAtDirection.y = 0f; // Set the Y-component to 0 to restrict rotation to the Y-axis
+            lookAtDirection.y = 0f; 
             platform.LookAt(platform.position + lookAtDirection, Vector3.up);
+            
             Vector3 startPoint = transform.position;
             Vector3 direction = randomEnemy.transform.position - startPoint;
             Vector3 endPoint = startPoint + direction.normalized * beamLength;
             beam.ActivateBeam(startPoint, endPoint);
             
-       
         }
     }
 
