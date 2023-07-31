@@ -8,11 +8,13 @@ public class BeamLauncher : MonoBehaviour
     [SerializeField] private float launchInterval = 3f;
     [SerializeField] private float beamLength = 100f;
     [SerializeField] private BeamData beamData;
+    [SerializeField] private Transform platform;
 
     private Transform enemyParent;
 
     private void Start()
     {
+        platform = transform.parent.parent;
         enemyParent = GameObject.Find("EnemyParent").transform;
         StartCoroutine(LaunchBeams());
         launchInterval = beamData.fireRate;
@@ -36,10 +38,19 @@ public class BeamLauncher : MonoBehaviour
 
         if (randomEnemy != null)
         {
+            // Get the target position (enemy's position)
+            Vector3 targetPosition = randomEnemy.transform.position;
+
+            // Rotate the grandparent object to look at the target position on the Y-axis
+            Vector3 lookAtDirection = targetPosition - platform.position;
+            lookAtDirection.y = 0f; // Set the Y-component to 0 to restrict rotation to the Y-axis
+            platform.LookAt(platform.position + lookAtDirection, Vector3.up);
             Vector3 startPoint = transform.position;
             Vector3 direction = randomEnemy.transform.position - startPoint;
             Vector3 endPoint = startPoint + direction.normalized * beamLength;
             beam.ActivateBeam(startPoint, endPoint);
+            
+       
         }
     }
 

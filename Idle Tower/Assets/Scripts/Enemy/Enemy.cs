@@ -83,6 +83,7 @@ public class Enemy : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Tower"))
         {
+            transform.GetComponentInChildren<Animator>().SetBool("isAttacking", true);
             shouldStop = true;
             other.gameObject.GetComponent<Tower>().TakeDamage(damage);
             rb.velocity = Vector3.zero;

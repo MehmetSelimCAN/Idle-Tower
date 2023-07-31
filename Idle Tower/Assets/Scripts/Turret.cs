@@ -26,6 +26,8 @@ public class Turret : MonoBehaviour
 
     [SerializeField] private GameObject targetCube;
 
+    private float rotationSpeed = 10f;
+
     private void OnEnable()
     {
         ETouch.EnhancedTouchSupport.Enable();
@@ -191,7 +193,20 @@ public class Turret : MonoBehaviour
     
     private void RotateTurretHead()
     {
-        transform.LookAt(targetCube.transform);
+        Vector3 targetPosition = targetCube.transform.position;
+
+        // Calculate the direction from the turret's position to the target position
+        Vector3 directionToTarget = targetPosition - transform.position;
+        directionToTarget.y = 0f; // Set the Y-component to 0 to restrict rotation to the Y-axis
+
+        // Use LookAt to make the turret instantly face the target in the Y-axis
+        transform.LookAt(targetPosition);
+
+        // Reset the turret's rotation on the X and Z axes to maintain its original orientation
+        Quaternion originalRotation = Quaternion.Euler(0f, transform.eulerAngles.y, 0f);
+        transform.rotation = originalRotation;
     }
+
+
     
 }
